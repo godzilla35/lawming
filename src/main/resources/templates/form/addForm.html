@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+
+<div>
+
+    <h2>상품 등록 폼</h2>
+    <form action="item.html" th:action th:object="${item}" method="post">
+
+        <div>
+            <label for="city">지역</label>
+            <select id="city" name="city" th:field="*{city}">
+                <option value="none">=== 선택 ===</option>
+                <option value="Seoul" selected>서울</option>
+                <option value="Incheon_Gyeonggi">인천/경기</option>
+                <option value="Gangwon">강원도</option>
+                <option value="Chungcheongbuk">충북</option>
+                <option value="Daejeon_Sejong_Chungcheongnam">대전/세종/충청남도</option>
+                <option value="Daegu_Gyeongsangbuk">대구/경상북도</option>
+                <option value="Busan_Ulsan_Gyeongsangnam">부산/울산/경상남도</option>
+                <option value="Gwanju_Jeollanam">광주/전라남도</option>
+                <option value="Jeollabuk">전라북도</option>
+                <option value="Jeju">제주도</option>
+            </select>
+        </div>
+
+        <div>
+            <label for="dueDate">일정</label>
+            <input type="datetime-local" id="dueDate" th:field="*{dueDate}" placeholder="일정을 입력하세요">
+        </div>
+
+        <div>
+            <label for="price">가격</label>
+            <input type="text" id="price" th:field="*{price}" placeholder="가격을 입력하세요">
+            <p th:if="${#fields.hasErrors('price')}" th:errors="*{price}">잘못된 가격</p>
+        </div>
+
+
+        <div>
+            <button type="submit">저장</button>
+        </div>
+        <div>
+            <button onclick="location.href='items.html'"
+                    th:onclick="|location.href='@{/form/items}'|"
+                    type="button">취소</button>
+        </div>
+    </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+
+<div>
+    <h2 th:if="${param.status}" th:text="'저장 완료'"></h2>
+
+    <div>
+        <div>
+            <label for="itemId">상품 ID</label>
+            <input type="text" id="itemId" name="itemId" value="id" th:value="${item.id}" readonly>
+        </div>
+        <div>
+            <label for="city">지역</label>
+            <input type="text" id="city" name="city" value="지역" th:value="${item.city}" readonly>
+        </div>
+        <div>
+            <label for="price">가격</label>
+            <input type="text" id="price" name="price" value="가격" th:value="${item.price}" readonly>
+        </div>
+        <div>
+            <label for="dueDate">일정</label>
+            <input type="text" id="dueDate" name="dueDate" value="일정" th:value="${item.dueDate}" readonly>
+        </div>
+        <div>
+            <label for="ownerName">판매자</label>
+            <input type="text" id="ownerName" name="ownerName" value="판매자" th:value="${item.owner?.userName}" readonly>
+        </div>
+    </div>
+
+    <button onclick="location.href='editForm.html'"
+            th:onclick="|location.href='@{/form/items/{itemId}/edit(itemId=${item.id})}'|"
+            type="button">상품 수정
+    </button>
+
+    <button onclick="location.href='items.html'"
+            th:onclick="|location.href='@{/form/items}'|"
+            type="button">목록으로
+    </button>
+
+</div>
+</body>
+</html>

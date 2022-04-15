@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+
+
+<div>
+    <div>
+        <button
+                onclick="location.href='addForm.html'"
+                th:onclick="|location.href='@{/form/items/add}'|">상품 등록
+        </button>
+    </div>
+
+    <div>
+        <table>
+            <thead>
+            <tr>
+                <td>ID</td>
+                <td>지역</td>
+                <td>가격</td>
+                <td>판매자</td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="item : ${items}">
+                <td><a href="item.html" th:href="@{|/form/items/${item.id}|}" th:text="${item.id}">상품 id</a></td>
+                <td><a href="item.html" th:href="@{|/form/items/${item.id}|}" th:text="${item.city}">지역</a></td>
+                <td th:text="${item.price}">상품 가격</td>
+                <td th:text="${item.owner?.userName}">판매자</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+</body>
+</html>
