@@ -1,6 +1,8 @@
 package com.lawming.server.controller;
 
 import com.lawming.server.domain.Item;
+import com.lawming.server.domain.ItemSaveForm;
+import com.lawming.server.domain.ItemUpdateForm;
 import com.lawming.server.service.ItemService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -23,13 +25,8 @@ import java.util.List;
 public class ItemController {
 
     private final ItemService itemService;
-    private final ItemValidator itemValidator;
+    //private final ItemValidator itemValidator;
 
-    // 여기 컨트롤러 안에 요청이 들어오면 init 함수가 항상 실행되고 항상 유효성 검증을 하게됨
-    @InitBinder
-    public void init(WebDataBinder dataBinder) {
-        dataBinder.addValidators(itemValidator);
-    }
 
     @GetMapping
     public String items(Model model) {
@@ -51,19 +48,23 @@ public class ItemController {
 
     @GetMapping("/add")
     public String addItem(Model model) {
-        model.addAttribute("item", new Item());
+        model.addAttribute("itemSaveForm", new ItemSaveForm());
 
         return "form/addForm";
     }
 
     // @Validated 이것덕분에  @InitBinder 여기에 매개변수로 item이 날아감
     @PostMapping("/add")
-    public String addItem(@Validated @ModelAttribute Item item, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+    public String addItem(@Validated @ModelAttribute ItemSaveForm itemSaveForm, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
 
         if(bindingResult.hasErrors()) {
             log.info("error = {}", bindingResult);
             return "form/addForm";
         }
+        Item item = new Item();
+        item.setPrice(itemSaveForm.getPrice());
+        item.setCity(itemSaveForm.getCity());
+        item.setDueDate(itemSaveForm.getDueDate());
 
         itemService.saveItem(item);
         redirectAttributes.addAttribute("itemId", item.getId());
@@ -73,13 +74,25 @@ public class ItemController {
 
     @GetMapping("/{itemId}/edit")
     public String editItem(@PathVariable Long itemId, Model model) {
+        log.info("===### id = {}", itemId);
         Item getItem = itemService.findItem(itemId);
-        model.addAttribute("item", getItem);
+
+        model.addAttribute("itemUpdateForm", getItem);
         return "form/editForm";
     }
 
     @PostMapping("/{itemId}/edit")
-    public String editItem(@PathVariable Long itemId, @ModelAttribute Item item) {
+    public String editItem(@PathVariable Long itemId, @Validated @ModelAttribute ItemUpdateForm itemUpdateForm, BindingResult bindingResult) {
+        if(bindingResult.hasErrors()) {
+            log.info("error = {}", bindingResult);
+            return "form/editForm";
+        }
+
+        Item item = new Item();
+        item.setPrice(itemUpdateForm.getPrice());
+        item.setCity(itemUpdateForm.getCity());
+        item.setDueDate(itemUpdateForm.getDueDate());
+
         itemService.updateItem(itemId, item);
         return "redirect:/form/items/{itemId}";
     }

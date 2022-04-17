@@ -11,7 +11,7 @@
         <h2>상품 수정 폼</h2>
     </div>
 
-    <form action="item.html" th:action th:object="${item}" method="post">
+    <form action="item.html" th:action th:object="${itemUpdateForm}" method="post">
         <div>
             <label for="id">상품 ID</label>
             <input type="text" id="id" th:field="*{id}" class="form-control" readonly>
@@ -50,7 +50,7 @@
         </div>
         <div>
             <button onclick="location.href='item.html'"
-                    th:onclick="|location.href='@{/form/items/{itemId}(itemId=${item.id})}'|"
+                    th:onclick="|location.href='@{/form/items/{itemId}(itemId=${itemUpdateForm.id})}'|"
                     type="button">취소
             </button>
         </div>
