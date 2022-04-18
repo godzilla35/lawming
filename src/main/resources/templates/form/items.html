@@ -29,7 +29,7 @@
                 <td><a href="item.html" th:href="@{|/form/items/${item.id}|}" th:text="${item.id}">상품 id</a></td>
                 <td><a href="item.html" th:href="@{|/form/items/${item.id}|}" th:text="${item.city}">지역</a></td>
                 <td th:text="${item.price}">상품 가격</td>
-                <td th:text="${item.owner?.userName}">판매자</td>
+                <td th:text="${item.owner?.name}">판매자</td>
             </tr>
             </tbody>
         </table>
