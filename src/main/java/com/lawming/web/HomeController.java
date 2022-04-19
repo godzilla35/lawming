@@ -79,11 +79,9 @@ public class HomeController {
     public String homeLoginV3(@SessionAttribute(name = "loginMember", required = false) Member loginMember, Model model) {
 
         if(loginMember == null) {
-            log.info("===### homeLoginV3 loginMember null");
             return "home";
         }
 
-        log.info("===### homeLoginV3 loginMember not null");
         // 세션이 유지되면 로그인으로 이동
         model.addAttribute("member", loginMember);
 

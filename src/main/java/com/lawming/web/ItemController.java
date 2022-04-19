@@ -71,7 +71,6 @@ public class ItemController {
 
     @GetMapping("/{itemId}/edit")
     public String editItem(@PathVariable Long itemId, Model model) {
-        log.info("===### id = {}", itemId);
         Item getItem = itemService.findItem(itemId);
 
         model.addAttribute("itemUpdateForm", getItem);

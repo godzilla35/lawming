@@ -18,12 +18,10 @@ public class LoginService {
     public Member login (String loginId, String password) {
         List<Member> members = memberRepository.findByLoginId(loginId);
         if(members.isEmpty()) {
-            log.info("===### not exist loginId = {]", loginId);
             return null;
         }
 
         if(members.size() > 1) {
-            log.info("===### too many members loginId = {]", loginId);
             return null;
         }
 
