@@ -1,6 +1,7 @@
 package com.lawming.web;
 
 import com.lawming.domain.member.Member;
+import com.lawming.web.argumentresolver.Login;
 import com.lawming.web.service.MemberService;
 import com.lawming.web.session.SessionManager;
 import lombok.RequiredArgsConstructor;
@@ -75,8 +76,22 @@ public class HomeController {
 
     }
 
-    @GetMapping("/")
+    //@GetMapping("/")
     public String homeLoginV3(@SessionAttribute(name = "loginMember", required = false) Member loginMember, Model model) {
+
+        if(loginMember == null) {
+            return "home";
+        }
+
+        // 세션이 유지되면 로그인으로 이동
+        model.addAttribute("member", loginMember);
+
+        return "loginHome";
+
+    }
+
+    @GetMapping("/")
+    public String homeLoginV3ArgumentResolver(@Login Member loginMember, Model model) {
 
         if(loginMember == null) {
             return "home";
