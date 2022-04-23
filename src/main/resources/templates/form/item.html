@@ -5,6 +5,8 @@
 </head>
 <body>
 
+<div th:replace="~{/fragment/common :: header}"></div>
+
 <div>
     <h2 th:if="${param.status}" th:text="'저장 완료'"></h2>
 
@@ -31,7 +33,8 @@
         </div>
     </div>
 
-    <button onclick="location.href='editForm.html'"
+    <button th:if="${loginMember.id} eq ${item.owner.id}"
+            onclick="location.href='editForm.html'"
             th:onclick="|location.href='@{/form/items/{itemId}/edit(itemId=${item.id})}'|"
             type="button">상품 수정
     </button>
@@ -42,5 +45,7 @@
     </button>
 
 </div>
+
+<div th:replace="~{/fragment/common :: footer}"></div>
 </body>
 </html>

@@ -1,6 +1,8 @@
 package com.lawming.web;
 
 import com.lawming.domain.item.Item;
+import com.lawming.domain.member.Member;
+import com.lawming.web.argumentresolver.Login;
 import com.lawming.web.item.form.ItemSaveForm;
 import com.lawming.web.item.form.ItemUpdateForm;
 import com.lawming.web.service.ItemService;
@@ -37,9 +39,13 @@ public class ItemController {
     }
 
     @GetMapping("/{itemId}")
-    public String item(@PathVariable Long itemId, Model model) {
+    public String item(@PathVariable Long itemId, @Login Member loginMember, Model model) {
         Item item = itemService.findItem(itemId);
         model.addAttribute("item", item);
+
+        model.addAttribute("loginMember", loginMember);
+
+        log.info("===### loginMember.getId = {}, item.getOwner.id = {}", loginMember.getId(), item.getOwner().getId());
         return "form/item";
     }
 
