@@ -1,11 +1,13 @@
-package com.lawming.domain;
+package com.lawming.domain.order;
 
 import com.lawming.domain.item.Item;
 import com.lawming.domain.member.Member;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
+@Slf4j
 @Entity
 @Table(name = "ORDERS")
 public class Order {
@@ -69,6 +71,7 @@ public class Order {
         order.setOrderDateTime(LocalDateTime.now());
         order.setItem(item);
         order.setRequestMember(requestMember);
+
         return order;
     }
 }

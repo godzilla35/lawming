@@ -1,6 +1,7 @@
-package com.lawming.web;
+package com.lawming.web.controller;
 
 import com.lawming.domain.member.Member;
+import com.lawming.web.SessionConst;
 import com.lawming.web.argumentresolver.Login;
 import com.lawming.web.service.MemberService;
 import com.lawming.web.session.SessionManager;

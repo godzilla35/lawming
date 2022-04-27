@@ -1,4 +1,4 @@
-package com.lawming.web;
+package com.lawming.web.controller;
 
 import com.lawming.domain.item.Item;
 import com.lawming.domain.member.Member;
@@ -58,7 +58,7 @@ public class ItemController {
 
     // @Validated 이것덕분에  @InitBinder 여기에 매개변수로 item이 날아감
     @PostMapping("/add")
-    public String addItem(@Validated @ModelAttribute ItemSaveForm itemSaveForm, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+    public String addItem(@Validated @ModelAttribute ItemSaveForm itemSaveForm, @Login Member loginMember, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
 
         if(bindingResult.hasErrors()) {
             log.info("error = {}", bindingResult);
@@ -68,6 +68,7 @@ public class ItemController {
         item.setPrice(itemSaveForm.getPrice());
         item.setCity(itemSaveForm.getCity());
         item.setDueDate(itemSaveForm.getDueDate());
+        item.setOwner(loginMember);
 
         itemService.saveItem(item);
         redirectAttributes.addAttribute("itemId", item.getId());
@@ -76,8 +77,10 @@ public class ItemController {
     }
 
     @GetMapping("/{itemId}/edit")
-    public String editItem(@PathVariable Long itemId, Model model) {
+    public String editItem(@PathVariable Long itemId, @Login Member loginMember, Model model) {
         Item getItem = itemService.findItem(itemId);
+        // TODO : 본인의 상품이 아니라면 오류를 반환해야한다.
+
 
         model.addAttribute("itemUpdateForm", getItem);
         return "form/editForm";

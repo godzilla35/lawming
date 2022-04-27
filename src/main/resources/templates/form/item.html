@@ -33,11 +33,25 @@
         </div>
     </div>
 
-    <button th:if="${loginMember.id} eq ${item.owner.id}"
-            onclick="location.href='editForm.html'"
-            th:onclick="|location.href='@{/form/items/{itemId}/edit(itemId=${item.id})}'|"
-            type="button">상품 수정
-    </button>
+    <div th:if="${loginMember.id} eq ${item.owner.id}">
+        <button
+                onclick="location.href='editForm.html'"
+                th:onclick="|location.href='@{/form/items/{itemId}/edit(itemId=${item.id})}'|"
+                type="button">상품 수정
+        </button>
+
+        <button
+                onclick="location.href='editForm.html'"
+                th:onclick="|location.href='@{/form/items/{itemId}/edit(itemId=${item.id})}'|"
+                type="button">신청 보기
+        </button>
+    </div>
+
+    <div th:if="${loginMember.id} neq ${item.owner.id}">
+        <form th:action="@{/orders/{itemId}(itemId=${item.id})}" method="post">
+            <button type="submit" > 신청 </button>
+        </form>
+    </div>
 
     <button onclick="location.href='items.html'"
             th:onclick="|location.href='@{/form/items}'|"

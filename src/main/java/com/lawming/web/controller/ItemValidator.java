@@ -1,4 +1,4 @@
-package com.lawming.web;
+package com.lawming.web.controller;
 
 import com.lawming.domain.item.Item;
 import org.springframework.stereotype.Component;

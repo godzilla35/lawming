@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+
+<div th:replace="~{/fragment/common :: header}"></div>
+
+<div>
+    <table>
+        <thead>
+        <tr>
+            <td>ID</td>
+            <td>상태</td>
+            <td>신청자</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="order : ${orders}">
+            <td th:text="${order.id}">주문 id</td>
+            <td th:text="${order.orderStatus}">주문 상태</td>
+            <td th:text="${order.requestMember.name}">신청자</td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+
+<div th:replace="~{/fragment/common :: footer}"></div>
+
+</body>
+</html>

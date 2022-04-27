@@ -1,6 +1,6 @@
 package com.lawming.domain.member;
 
-import com.lawming.domain.Order;
+import com.lawming.domain.order.Order;
 import com.lawming.domain.item.Item;
 
 import javax.persistence.*;
@@ -102,5 +102,9 @@ public class Member {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

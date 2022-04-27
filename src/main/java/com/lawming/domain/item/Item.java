@@ -1,7 +1,7 @@
 package com.lawming.domain.item;
 
 import com.lawming.domain.member.Member;
-import com.lawming.domain.Order;
+import com.lawming.domain.order.Order;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -41,6 +41,10 @@ public class Item {
         item.setOwner(owner);
 
         return item;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Long getId() {

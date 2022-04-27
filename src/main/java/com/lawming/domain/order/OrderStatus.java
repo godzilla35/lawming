@@ -1,4 +1,4 @@
-package com.lawming.domain;
+package com.lawming.domain.order;
 
 public enum OrderStatus {
     WAIT,
