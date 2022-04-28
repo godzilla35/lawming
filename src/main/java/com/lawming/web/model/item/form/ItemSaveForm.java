@@ -1,4 +1,4 @@
-package com.lawming.web.item.form;
+package com.lawming.web.model.item.form;
 
 import lombok.Data;
 import org.hibernate.validator.constraints.Range;

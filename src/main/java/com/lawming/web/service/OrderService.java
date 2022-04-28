@@ -24,8 +24,8 @@ public class OrderService {
     private final ItemRepository itemRepository;
 
     @Transactional
-    public Long order(Long memberId, Long itemId) {
-        Member member = memberRepository.findOne(memberId);
+    public Long order(Long requestMemberId, Long itemId) {
+        Member member = memberRepository.findOne(requestMemberId);
         Item item = itemRepository.findOne(itemId);
 
         List<Order> orders = orderRepository.findByItemIdMemberId(item.getId(), member.getId());
@@ -35,7 +35,7 @@ public class OrderService {
             return order.getId();
         } else {
             if (orders.size() != 1) {
-                log.info("invalid order exist!! itemId = {} memberId = {}", itemId, memberId);
+                log.info("invalid order exist!! itemId = {} memberId = {}", itemId, requestMemberId);
                 return -1L;
             } else {
                 return orders.get(0).getId();

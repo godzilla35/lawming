@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+
+<div th:replace="~{/fragment/common :: header}"></div>
+
+<div>
+    <div>
+        <div>
+            <label for="city">loginId</label>
+            <input type="text" id="city" name="city" value="지역" th:value="${memberInfoForm.loginId}" readonly>
+        </div>
+        <div>
+            <label for="price">이름</label>
+            <input type="text" id="price" name="price" value="가격" th:value="${memberInfoForm.name}" readonly>
+        </div>
+        <div>
+            <label for="dueDate">이메일</label>
+            <input type="text" id="dueDate" name="dueDate" value="일정" th:value="${memberInfoForm.emailAddress}" readonly>
+        </div>
+        <div>
+            <label for="ownerName">전화번호</label>
+            <input type="text" id="ownerName" name="ownerName" value="판매자" th:value="${memberInfoForm.phoneNumber}" readonly>
+        </div>
+    </div>
+
+    <button onclick="location.href='items.html'"
+            th:onclick="|location.href='@{/form/items}'|"
+            type="button">목록으로
+    </button>
+
+</div>
+
+<div th:replace="~{/fragment/common :: footer}"></div>
+</body>
+</html>
