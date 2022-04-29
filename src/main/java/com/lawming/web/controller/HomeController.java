@@ -94,14 +94,12 @@ public class HomeController {
     @GetMapping("/")
     public String homeLoginV3ArgumentResolver(@Login Member loginMember, Model model) {
 
-        if(loginMember == null) {
-            return "home";
+        if(loginMember != null) {
+            model.addAttribute("member", loginMember);
         }
 
         // 세션이 유지되면 로그인으로 이동
-        model.addAttribute("member", loginMember);
-
-        return "loginHome";
+        return "index";
 
     }
 
