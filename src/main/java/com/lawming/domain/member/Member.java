@@ -30,6 +30,8 @@ public class Member {
 
     private String phoneNumber;
 
+    private String role;
+
     @OneToMany(mappedBy = "owner")
     private List<Item> items;
 
@@ -107,4 +109,8 @@ public class Member {
     public void setId(Long id) {
         this.id = id;
     }
+
+    public String getRole() {return role;}
+
+    public void setRole(String role) {this.role = role;}
 }

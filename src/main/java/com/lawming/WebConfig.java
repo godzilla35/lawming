@@ -16,7 +16,7 @@ import javax.servlet.Filter;
 import javax.servlet.FilterRegistration;
 import java.util.List;
 
-@Configuration
+//@Configuration
 public class WebConfig implements WebMvcConfigurer {
 
     //@Bean

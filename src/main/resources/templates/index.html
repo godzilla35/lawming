@@ -1,5 +1,6 @@
 <!doctype html>
-<html lang="ko" class="h-100" xmlns:th="http://www.thymeleaf.org">
+<html lang="ko" class="h-100" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -36,6 +37,7 @@
     <link href="sticky-footer-navbar.css" rel="stylesheet">
 </head>
 <body class="d-flex flex-column h-100">
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <header>
     <!-- Fixed navbar -->
@@ -60,7 +62,8 @@
 
                 <button class="btn btn-outline-success" type="button"
                         onclick="location.href='login.html'"
-                        th:onclick="|location.href='@{/login}'|">로그인</button>
+                        th:onclick="|location.href='@{/loginForm}'|">로그인</button>
+
             </div>
         </div>
     </nav>
@@ -132,6 +135,15 @@
 
     </div>
 </main>
+
+<div sec:authorize="isAnonymous()">
+    <p>로그인 X</p>
+</div>
+
+<div sec:authorize="isAuthenticated()">
+    <span sec:authentication="name">Bob</span>
+</div>
+
 
 <footer class="footer mt-auto py-3 bg-light">
     <div class="container">

@@ -4,6 +4,7 @@ import com.lawming.domain.item.Item;
 import com.lawming.domain.member.Member;
 import com.lawming.domain.repository.ItemRepository;
 import com.lawming.domain.repository.MemberRepository;
+import com.lawming.web.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -14,6 +15,7 @@ import javax.annotation.PostConstruct;
 public class TestInit {
 
     private final ItemRepository itemRepository;
+    private final MemberService memberService;
     private final MemberRepository memberRepository;
 
     @PostConstruct
@@ -30,8 +32,8 @@ public class TestInit {
                 "test2@naver.com",
                 "010-5678-1234");
 
-        memberRepository.save(member1);
-        memberRepository.save(member2);
+        memberService.join(member1);
+        memberService.join(member2);
 
         Item item1 = Item.createItem("Seoul", 100001, member1);
         Item item2 = Item.createItem("Seoul", 100002, member2);

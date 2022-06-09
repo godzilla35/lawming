@@ -45,7 +45,6 @@ public class ItemController {
 
         model.addAttribute("loginMember", loginMember);
 
-        log.info("===### loginMember.getId = {}, item.getOwner.id = {}", loginMember.getId(), item.getOwner().getId());
         return "form/item";
     }
 
